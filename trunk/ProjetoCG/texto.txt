@@ -1,0 +1,10 @@
+PONTOS
+p1 0 0 0
+p2 1 0 0
+p3 2 0 0
+p4 3 0 0
+p5 4 0 0
+p6 5 0 0
+
+LINHAS
+rosa p1 p2,vermelho p2 p3, azul p3 p4
