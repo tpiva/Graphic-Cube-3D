@@ -3,25 +3,36 @@
  *
  * Created on 30. Juli 2008, 16:18
  */
-
 package view;
 
 import com.sun.opengl.util.Animator;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLJPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import util.Arquivo;
 import util.GLRenderer;
 
 /**
@@ -36,7 +47,7 @@ public class SimpleGLJPanel extends JFrame {
     /** Creates new form MainFrame */
     public SimpleGLJPanel() {
         initComponents();
-        setTitle("Simple JOGL Application");
+        setTitle("Projeto de CG");
 
         panel.addGLEventListener(new GLRenderer());
         animator = new Animator(panel);
@@ -60,12 +71,14 @@ public class SimpleGLJPanel extends JFrame {
     }
 
     @Override
-    public void setVisible(boolean show){
-        if(!show)
+    public void setVisible(boolean show) {
+        if (!show) {
             animator.stop();
+        }
         super.setVisible(show);
-        if(!show)
+        if (!show) {
             animator.start();
+        }
     }
 
     /** This method is called from within the constructor to
@@ -76,12 +89,20 @@ public class SimpleGLJPanel extends JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        JLabel label = new JLabel();
+
         panel = new GLJPanel(createGLCapabilites());
+        coordenadaXObservador = new JTextField();
+        coordenadaYObservador = new JTextField();
+        coordenadaZObservador = new JTextField();
+        botatoDesenhar = new JButton();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
+        jMenuBar1 = new JMenuBar();
+        menu = new JMenu();
+        arquivoSubMenu = new JMenuItem();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        label.setText("Below you see a GLJPanel");
 
         GroupLayout panelLayout = new GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -94,30 +115,127 @@ public class SimpleGLJPanel extends JFrame {
             .addGap(0, 420, Short.MAX_VALUE)
         );
 
+        coordenadaXObservador.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                coordenadaXObservadorActionPerformed(evt);
+            }
+        });
+
+        coordenadaYObservador.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                coordenadaYObservadorActionPerformed(evt);
+            }
+        });
+
+        botatoDesenhar.setText("Desenhar");
+
+        jLabel1.setText("Z      ");
+
+        jLabel2.setText("Y");
+
+        jLabel3.setText("X");
+
+        menu.setText("Menu");
+
+        arquivoSubMenu.setText("Arquivo");
+        arquivoSubMenu.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                arquivoSubMenuMouseClicked(evt);
+            }
+        });
+        arquivoSubMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                arquivoSubMenuActionPerformed(evt);
+            }
+        });
+        menu.add(arquivoSubMenu);
+
+        jMenuBar1.add(menu);
+
+        setJMenuBar(jMenuBar1);
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(Alignment.LEADING)
-                    .addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label)
-                        .addContainerGap(590, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel1))
+                        .addPreferredGap(ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+                            .addComponent(coordenadaZObservador, Alignment.LEADING)
+                            .addComponent(coordenadaYObservador)
+                            .addComponent(coordenadaXObservador, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(botatoDesenhar))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label)
-                .addPreferredGap(ComponentPlacement.RELATED)
-                .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(coordenadaXObservador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(coordenadaYObservador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(coordenadaZObservador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(botatoDesenhar))
+                    .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void coordenadaXObservadorActionPerformed(ActionEvent evt) {//GEN-FIRST:event_coordenadaXObservadorActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_coordenadaXObservadorActionPerformed
+
+private void coordenadaYObservadorActionPerformed(ActionEvent evt) {//GEN-FIRST:event_coordenadaYObservadorActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_coordenadaYObservadorActionPerformed
+
+private void arquivoSubMenuMouseClicked(MouseEvent evt) {//GEN-FIRST:event_arquivoSubMenuMouseClicked
+    // TODO add your handling code here:
+}//GEN-LAST:event_arquivoSubMenuMouseClicked
+
+private void arquivoSubMenuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_arquivoSubMenuActionPerformed
+    Arquivo trataArquivo = new Arquivo();
+    JFileChooser buscadorArquivos = new JFileChooser();
+    int escolha = buscadorArquivos.showOpenDialog(SimpleGLJPanel.this);
+    File arquivoSelecionado = buscadorArquivos.getSelectedFile();
+
+    try {
+        if (escolha == JFileChooser.APPROVE_OPTION) {
+            if (arquivoSelecionado != null) {
+
+                trataArquivo.setNomeArquivo(arquivoSelecionado.getCanonicalPath());
+
+            } else {
+                //Lançar mensagem de erro
+            }
+        }
+
+    } catch (IOException ex) {
+        Logger.getLogger(SimpleGLJPanel.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}//GEN-LAST:event_arquivoSubMenuActionPerformed
 
     /**
      * Called from within initComponents().
@@ -126,40 +244,49 @@ public class SimpleGLJPanel extends JFrame {
      * @return Returns customized GLCapabilities.
      */
     private GLCapabilities createGLCapabilites() {
-        
+
         GLCapabilities capabilities = new GLCapabilities();
         capabilities.setHardwareAccelerated(true);
 
         // try to enable 2x anti aliasing - should be supported on most hardware
         capabilities.setNumSamples(2);
         capabilities.setSampleBuffers(true);
-        
+
         return capabilities;
     }
-    
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         // Run this in the AWT event thread to prevent deadlocks and race conditions
         EventQueue.invokeLater(new Runnable() {
+
             public void run() {
-                
+
                 // switch to system l&f for native font rendering etc.
-                try{
+                try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                }catch(Exception ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(getClass().getName()).log(Level.INFO, "can not enable system look and feel", ex);
                 }
-                
+
                 SimpleGLJPanel frame = new SimpleGLJPanel();
                 frame.setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JMenuItem arquivoSubMenu;
+    private JButton botatoDesenhar;
+    private JTextField coordenadaXObservador;
+    private JTextField coordenadaYObservador;
+    private JTextField coordenadaZObservador;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel3;
+    private JMenuBar jMenuBar1;
+    private JMenu menu;
     private GLJPanel panel;
     // End of variables declaration//GEN-END:variables
-
 }
