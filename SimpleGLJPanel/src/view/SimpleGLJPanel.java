@@ -5,6 +5,7 @@
  */
 package view;
 
+import bean.Objeto;
 import com.sun.opengl.util.Animator;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -34,6 +35,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import util.Arquivo;
 import util.GLRenderer;
+import util.TratarConteudoArquivo;
 
 /**
  *
@@ -216,25 +218,20 @@ private void arquivoSubMenuMouseClicked(MouseEvent evt) {//GEN-FIRST:event_arqui
 }//GEN-LAST:event_arquivoSubMenuMouseClicked
 
 private void arquivoSubMenuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_arquivoSubMenuActionPerformed
-    Arquivo trataArquivo = new Arquivo();
+    TratarConteudoArquivo trata = null;
     JFileChooser buscadorArquivos = new JFileChooser();
     int escolha = buscadorArquivos.showOpenDialog(SimpleGLJPanel.this);
     File arquivoSelecionado = buscadorArquivos.getSelectedFile();
 
-    try {
-        if (escolha == JFileChooser.APPROVE_OPTION) {
-            if (arquivoSelecionado != null) {
-
-                trataArquivo.setNomeArquivo(arquivoSelecionado.getCanonicalPath());
-
-            } else {
-                //Lançar mensagem de erro
-            }
+    if (escolha == JFileChooser.APPROVE_OPTION) {
+        if (arquivoSelecionado != null) {
+            trata = new TratarConteudoArquivo(arquivoSelecionado);
+            trata.tratarArquivo(new Objeto());
+        } else {
+            //Lançar mensagem de erro
         }
-
-    } catch (IOException ex) {
-        Logger.getLogger(SimpleGLJPanel.class.getName()).log(Level.SEVERE, null, ex);
     }
+
 }//GEN-LAST:event_arquivoSubMenuActionPerformed
 
     /**
