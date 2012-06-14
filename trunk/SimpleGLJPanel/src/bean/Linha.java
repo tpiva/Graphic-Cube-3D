@@ -15,6 +15,16 @@ public class Linha {
     public Ponto ponto2;  
     public Color cor;
 
+    public Linha(Ponto ponto1, Ponto ponto2, Color cor) {
+        this.ponto1 = ponto1;
+        this.ponto2 = ponto2;
+        this.cor = cor;
+    }
+
+    public Linha() {
+    }
+    
+    
     /**
      * @return the ponto1
      */

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Arquivo {
 
     private BufferedReader in;
-    private String nomeArquivo = "texto.txt";
+    private String nomeArquivo = null;
 
     private void abreArquivo() {
         try {
@@ -40,15 +40,12 @@ public class Arquivo {
     }
 
     public String getLinha() {
-
-
-
         String str = "";
         try {
 
-            if (!in.ready()) {
+            if (in == null) {
                 this.abreArquivo();
-            }
+            } 
             
             str = in.readLine();
 
@@ -64,5 +61,6 @@ public class Arquivo {
      */
     public void setNomeArquivo(String nomeArquivo) {
         this.nomeArquivo = nomeArquivo;
-    }
+    } 
+    
 }
