@@ -42,8 +42,31 @@ public class GLRenderer implements GLEventListener {
         
             height = 1;
         }
-        final float h = (float) width / (float) height;
-        gl.glViewport(0, 0, width, height);
+        final float h = (float) width / (float) height;  
+        
+        
+        //Desenha as coordenadas de referencia
+         gl.glBegin(GL.GL_LINES);
+                gl.glColor3f(10,10,10);    // seta a cor
+                gl.glVertex3d(0,0,0);   // coordenadas           
+                gl.glVertex3d(150,0,0); // coordenadas               
+         gl.glEnd();
+            
+        gl.glBegin(GL.GL_LINES);
+                gl.glColor3f(10,10,10);    // seta a cor
+                gl.glVertex3d(0,0,0);   // coordenadas           
+                gl.glVertex3d(0,150,0); // coordenadas               
+         gl.glEnd();
+         
+         gl.glBegin(GL.GL_LINES);
+                gl.glColor3f(10,10,10);    // seta a cor
+                gl.glVertex3d(0,00,0);   // coordenadas           
+                gl.glVertex3d(-150,-150,0); // coordenadas               
+         gl.glEnd();
+           
+        
+        
+        gl.glViewport(0, 0, width, height);        
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
         glu.gluPerspective(45.0f, h, 1.0, 20.0);
@@ -58,13 +81,13 @@ public class GLRenderer implements GLEventListener {
        
         //OBJETO USADO PARA TESTE!!!!!OBJETO USADO PARA TESTE!!!!!OBJETO USADO PARA TESTE!!!!!OBJETO USADO PARA TESTE!!!!!OBJETO USADO PARA TESTE!!!!!OBJETO USADO PARA TESTE!!!!!
         Ponto ponto1teste = new Ponto();
-        ponto1teste.coordenada_x = 0;
-        ponto1teste.coordenada_y = 0;
+        ponto1teste.coordenada_x = 2;
+        ponto1teste.coordenada_y = 1;
         ponto1teste.coordenada_z = 0;
         
         Ponto ponto2teste = new Ponto();
-        ponto2teste.coordenada_x = 1.3;
-        ponto2teste.coordenada_y = 1.5;
+        ponto2teste.coordenada_x = 1;
+        ponto2teste.coordenada_y = 3;
         ponto2teste.coordenada_z = 0;
         
         Linha linhateste = new Linha();
@@ -75,13 +98,13 @@ public class GLRenderer implements GLEventListener {
         objetoDesenhado.addLinha(linhateste);
         
         Ponto ponto3teste = new Ponto();
-        ponto3teste.coordenada_x = 0;
-        ponto3teste.coordenada_y = 0;
+        ponto3teste.coordenada_x = 1;
+        ponto3teste.coordenada_y = 3;
         ponto3teste.coordenada_z = 0;
         
         Ponto ponto4teste = new Ponto();
-        ponto4teste.coordenada_x = -0.3;
-        ponto4teste.coordenada_y = -1.5;
+        ponto4teste.coordenada_x = 2;
+        ponto4teste.coordenada_y = 2;
         ponto4teste.coordenada_z = 0;
         
         Linha linha2teste = new Linha();
@@ -92,14 +115,14 @@ public class GLRenderer implements GLEventListener {
         objetoDesenhado.addLinha(linha2teste);          
        
         Ponto ponto5teste = new Ponto();
-        ponto5teste.coordenada_x = 0;
-        ponto5teste.coordenada_y = 0;
+        ponto5teste.coordenada_x = 2;
+        ponto5teste.coordenada_y = 2;
         ponto5teste.coordenada_z = 0;
         
         Ponto ponto6teste = new Ponto();
-        ponto6teste.coordenada_x = 1.3;
-        ponto6teste.coordenada_y = -1.5;
-        ponto6teste.coordenada_z = 2;
+        ponto6teste.coordenada_x = 1;
+        ponto6teste.coordenada_y = 1;
+        ponto6teste.coordenada_z = 0;
         
         Linha linha3teste = new Linha();
         linha3teste.ponto1 = ponto5teste;

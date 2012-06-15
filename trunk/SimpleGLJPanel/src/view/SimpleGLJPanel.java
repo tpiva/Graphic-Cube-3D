@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLCapabilities;
 import javax.media.opengl.GLJPanel;
 import javax.swing.GroupLayout;
@@ -35,7 +36,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import util.Arquivo;
 import util.GLRenderer;
-import util.TratarConteudoArquivo;
+//import util.TratarConteudoArquivo;
 
 /**
  *
@@ -218,7 +219,7 @@ private void arquivoSubMenuMouseClicked(MouseEvent evt) {//GEN-FIRST:event_arqui
 }//GEN-LAST:event_arquivoSubMenuMouseClicked
 
 private void arquivoSubMenuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_arquivoSubMenuActionPerformed
-    TratarConteudoArquivo trata = null;
+   /* TratarConteudoArquivo trata = null;
     JFileChooser buscadorArquivos = new JFileChooser();
     int escolha = buscadorArquivos.showOpenDialog(SimpleGLJPanel.this);
     File arquivoSelecionado = buscadorArquivos.getSelectedFile();
@@ -230,7 +231,7 @@ private void arquivoSubMenuActionPerformed(ActionEvent evt) {//GEN-FIRST:event_a
         } else {
             //Lançar mensagem de erro
         }
-    }
+    }*/
 
 }//GEN-LAST:event_arquivoSubMenuActionPerformed
 
